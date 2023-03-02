@@ -1,0 +1,63 @@
+
+
+{{>_navbar}}
+  <div class="container text-center">
+      <h1> <p>GERENCIAR LOCAÇÃO</p> </h1>
+  </div>
+
+<div class="container text-center">
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/cadastrar_reboque"> <button class="btn btn-outline-primary" >Cadastrar reboque</button> </a>
+    <a class="navbar-brand" href="/cadastrar_cliente"> <button class="btn btn-outline-primary" >Cadastrar cliente</button> </a>
+    <a class="navbar-brand" href="/mostrar_cliente"> <button class="btn btn-outline-primary" >Ir para clientes</button> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link disabled">Saldo locações: R$ {{saldoVendas_db}} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">{{usuario_nome}}  </a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Placa</th>
+      <th scope="col">Cor</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each imprime_db}}
+    <tr>
+        <th scope="row">{{id}}</th>
+        <td>{{modelo}}</td>
+        <td>{{placa}}</td>
+        <td>{{cor}}</td>
+        <td>{{valor}}</td>
+        <td><a href="/deletar/{{id}}"> <button class="btn btn-danger" >Remover</button> </a></td>
+        <td><a href="/editar_reboque/{{id}}"> <button class="btn btn-danger" >Editar</button> </a></td>
+        <td><a href="/vender/{{id}}"> <button class="btn btn-success" >Alugar</button> </a></td>
+        <td><a href="/reservar/{{id}}"> <button class="btn btn-success" >Reservar</button> </a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

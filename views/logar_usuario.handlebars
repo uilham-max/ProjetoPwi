@@ -1,0 +1,30 @@
+<br>
+<div class="container">
+<div class="card">
+
+    <div class="container text-center">
+        <div class="container text-center">
+            <br><h1> <p>Faça login</p> </h1><br>
+        </div>
+         <form action="/logar_usuario" method="POST">
+            <div class="container">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" name="usuario" class="form-control" id="usuario" placeholder="usuario" required>
+                    <label for="floatingInput">Usuario</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="senha" class="form-control" id="senha" placeholder="senha" required>
+                    <label for="floatingInput">Senha</label>
+                </div>
+
+                <br><button type="submit" class="btn btn-outline-primary">Entrar</button>
+                <a href="/"><button type="button" class="btn btn-outline-primary" >Página Inicial</button></a><br><br>{{msgErro}} 
+            </div>
+        </form>
+        
+    </div>
+    
+</div>
+</div>

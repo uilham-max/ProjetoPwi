@@ -1,0 +1,58 @@
+{{>_navbar}}
+  <div class="container text-center">
+      <h1> <p>LISTA DE CLIENTES</p> </h1>
+  </div>
+
+<div class="container text-center">
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/cadastrar_reboque"> <button class="btn btn-outline-primary" >Cadastrar reboque</button> </a>
+    <a class="navbar-brand" href="/cadastrar_cliente"> <button class="btn btn-outline-primary" >Cadastrar cliente</button> </a>
+    <a class="navbar-brand" href="/"> <button class="btn btn-outline-primary" >Pagina Inicial</button> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        {{!-- <li class="nav-item">
+          <a class="nav-link disabled">Saldo Vendas: R$ {{saldoVendas_db}}  </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Saldo Estoque: R$ {{saldoEstoque}}  </a>
+        </li> --}}
+
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">E-mail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each clientes}}
+    <tr>
+        <th scope="row">{{dataValues.id}}</th>
+        <td>{{dataValues.nome}}</td>
+        <td>{{dataValues.sobrenome}}</td>
+        <td>{{dataValues.email}}</td>
+        <td><a href="/deletar/{{dataValues.id}}"> <button class="btn btn-danger" >Remover</button> </a></td>
+        <td><a href="/editar_cliente/{{dataValues.id}}"> <button class="btn btn-danger" >Editar</button> </a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

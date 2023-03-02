@@ -1,0 +1,44 @@
+<br>
+<div class="container">
+<div class="card">
+
+    <div class="container text-center">
+        <div class="container text-center">
+            <br><h1> <p>Cadastrar Reboque</p> </h1><br>
+        </div>
+         <form action="/cadastrar_reboque" method="POST">
+            <div class="container">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" required>
+                    <label for="floatingInput">modelo</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="placa" class="form-control" id="placa" placeholder="placa" required>
+                    <label for="floatingInput">placa</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="cor" class="form-control" id="cor" placeholder="cor" required>
+                    <label for="floatingInput">cor</label>
+                </div>
+
+                {{!-- <p>Comentario automatico Ctl+; </p> --}}
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input type="number" name="valor" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Preço da diária" min="1" required >
+                    <span class="input-group-text">.00</span>
+                </div>
+
+                <br><button type="submit" class="btn btn-outline-primary">Cadastrar</button><br>{{msgErro}}<br> 
+                
+            </div>
+        </form>
+                <a href="/mostrar_reboque"><button class="btn btn-outline-primary">Ir para reboques</button></a>
+                <a href="/"><button class="btn btn-outline-primary" >Página Inicial</button></a><br><br>
+    </div>
+    
+</div>
+</div>

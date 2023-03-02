@@ -1,0 +1,37 @@
+<br>
+<div class="container">
+<div class="card">
+
+    <div class="container text-center">
+        <div class="container text-center">
+            <br><h1> <p>Cadastrar Cliente</p> </h1><br>
+        </div>
+         <form action="/cadastrar_cliente" method="POST">
+            <div class="container">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" name="nome" class="form-control" id="nome" placeholder="nome" required>
+                    <label for="floatingInput">Nome</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="sobrenome" class="form-control" id="sobrenome" placeholder="sobrenome" required>
+                    <label for="floatingInput">Sobrenome</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="email" class="form-control" id="email" placeholder="email" required>
+                    <label for="floatingInput">E-mail</label>
+                </div>
+
+                <br><button type="submit" class="btn btn-outline-primary">Cadastrar</button><br>{{msgErro}}<br> 
+                
+            </div>
+        </form>
+                <a href="/mostrar_reboque"><button class="btn btn-outline-primary">Ir para reboques</button></a>
+                <a href="/mostrar_cliente"><button class="btn btn-outline-primary">Ir para clientes</button></a>
+                <a href="/"><button class="btn btn-outline-primary" >Página Inicial</button></a><br><br>
+    </div>
+    
+</div>
+</div>
