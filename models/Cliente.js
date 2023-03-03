@@ -7,7 +7,6 @@ const Cliente = db.sequelize.define("cliente", {
     email: {type: db.Sequelize.STRING, allowNull: false}
 });
 
-// ATENCAO -- forcar a criacao da tabela. Nao deixar essa linha exposta
 // Cliente.sync({force: true})
 
 module.exports = Cliente;

@@ -7,6 +7,7 @@ const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Usuario = require('./models/Usuario');
 const Reserva = require('./models/Reserva');
+const Locacao = require('./models/Locacao');
 
 
 // working whith json
