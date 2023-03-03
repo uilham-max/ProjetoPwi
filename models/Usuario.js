@@ -5,6 +5,6 @@ const Usuario = db.sequelize.define("usuario", {
     senha: {type: db.Sequelize.STRING, allowNull: false}
 });
 
-//Usuario.sync({force: true});
+// Usuario.sync({force: true});
 
 module.exports = Usuario;

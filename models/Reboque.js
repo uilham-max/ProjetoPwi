@@ -1,7 +1,7 @@
 const { BelongsTo } = require('sequelize');
 const db = require('../db/connections');
 const Cliente = require('./Cliente');
-const Reserva = require('./Reserva');
+// const Reserva = require('./Reserva');
 
 const Reboque = db.sequelize.define("reboque", {
     id: {type: db.Sequelize.INTEGER, autoIncrement: true, allowNull: false, primaryKey: true},
@@ -11,20 +11,8 @@ const Reboque = db.sequelize.define("reboque", {
     valor: {type: db.Sequelize.INTEGER, allowNull: false}
 });
 
-Cliente.belongsToMany(Reboque, {
-    through: {
-        model: Reserva
-    },
-    
-    foreignKey: 'idCliente',
-    constraint: true
-})
-Reboque.belongsToMany(Cliente, {
-    through:{
-        model: Reserva
-    },
-    foreignKey: 'idReboque',
-    constraint: true
+Cliente.hasMany(Reboque, {
+    foreignKey: 'idCliente'
 })
 
 

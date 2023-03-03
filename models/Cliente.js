@@ -8,6 +8,6 @@ const Cliente = db.sequelize.define("cliente", {
 });
 
 // ATENCAO -- forcar a criacao da tabela. Nao deixar essa linha exposta
-//Cliente.sync({force: true})
+// Cliente.sync({force: true})
 
 module.exports = Cliente;
