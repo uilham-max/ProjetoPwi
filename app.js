@@ -8,6 +8,9 @@ const Reboque = require('./models/Reboque');
 const Usuario = require('./models/Usuario');
 const Reserva = require('./models/Reserva');
 const Locacao = require('./models/Locacao');
+// const {Reboque, Cliente, Locacao} = require('./models/relacionamentos')
+
+
 
 
 // working whith json
