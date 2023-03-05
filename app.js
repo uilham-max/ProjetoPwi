@@ -6,11 +6,6 @@ const { where } = require('sequelize');
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Usuario = require('./models/Usuario');
-const Reserva = require('./models/Reserva');
-const Locacao = require('./models/Locacao');
-// const {Reboque, Cliente, Locacao} = require('./models/relacionamentos')
-
-
 
 
 // working whith json
@@ -34,7 +29,6 @@ app.set('view engine', 'handlebars')
 app.get('/', (req,res) => {
     res.render('index')
 })
-
 
 
 
@@ -135,7 +129,7 @@ app.get('/mostrar_reboque', async (req,res)=>{
     let imprime_db = await Reboque.findAll();
     res.render('mostrar_reboque',{imprime_db})
 })
-app.get('/deletar/:id', (req,res)=>{
+app.get('/deletar_reboque/:id', (req,res)=>{
     Reboque.destroy({
         where: {'id': req.params.id}
     }).then(()=>{
