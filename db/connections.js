@@ -13,3 +13,4 @@ sequelize.authenticate().then(()=>{
 })
 
 module.exports = {Sequelize, sequelize}
+

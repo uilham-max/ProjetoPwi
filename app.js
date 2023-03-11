@@ -3,9 +3,12 @@ const app = express();
 const port = 3000;
 const handlebars = require('express-handlebars');
 const { where } = require('sequelize');
+const Usuario = require('./models/Usuario');
+
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
-const Usuario = require('./models/Usuario');
+const Cliente_Reboque = require('./models/Locacao')
+
 
 
 // working whith json
@@ -36,9 +39,10 @@ app.get('/cadastrar_cliente', (req,res) => {
     res.render('cadastrar_cliente')
 })
 app.post('/cadastrar_cliente', (req,res)=>{
+    
     var regexNome = /^[A-Za-z]+$/;
-    var regexnovo = /^(?:[\p{Lu}&&[\p{IsLatin}]])(?:(?:')?(?:[\p{Ll}&&[\p{IsLatin}]]))+(?:\-(?:[\p{Lu}&&[\p{IsLatin}]])(?:(?:')?(?:[\p{Ll}&&[\p{IsLatin}]]))+)*(?: (?:(?:e|y|de(?:(?: la| las| lo| los))?|do|dos|da|das|del|van|von|bin|le) )?(?:(?:(?:d'|D'|O'|Mc|Mac|al\-))?(?:[\p{Lu}&&[\p{IsLatin}]])(?:(?:')?(?:[\p{Ll}&&[\p{IsLatin}]]))+|(?:[\p{Lu}&&[\p{IsLatin}]])(?:(?:')?(?:[\p{Ll}&&[\p{IsLatin}]]))+(?:\-(?:[\p{Lu}&&[\p{IsLatin}]])(?:(?:')?(?:[\p{Ll}&&[\p{IsLatin}]]))+)*))+(?: (?:Jr\.|II|III|IV))?$/;
     var emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+    
     if(!(req.body.nome.match(regexNome))){
         res.render('cadastrar_cliente', {msgErro: "Nome invalido."} )
     } else if (!(req.body.sobrenome.match(regexNome))){
@@ -61,11 +65,9 @@ app.post('/cadastrar_cliente', (req,res)=>{
     }
 })
 app.get('/mostrar_cliente', async (req,res)=>{
-    //let imprime_db_cliente = await Cliente.findAll();
     Cliente.findAll().then((clientes)=>{
         res.render('mostrar_cliente', {clientes: clientes})
     })
-    //res.render('mostrar_cliente', {imprime_db_cliente})
 })
 app.get('/editar_cliente/:id', async (req,res)=>{
     
@@ -91,7 +93,7 @@ app.post('/editar_cliente', (req,res)=>{
         //res.redirect('/mostrar_cliente')
     })
 })
-app.get('/deletar/:id', (req,res)=>{
+app.get('/deletar_cliente/:id', (req,res)=>{
     Cliente.destroy({
         where: {'id': req.params.id}
     }).then(()=>{
