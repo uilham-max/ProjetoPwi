@@ -4,7 +4,7 @@ const port = 3000;
 const handlebars = require('express-handlebars');
 const { where } = require('sequelize');
 const Usuario = require('./models/Usuario');
-
+const bcrypt = require('bcrypt');
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Cliente_Reboque = require('./models/Locacao')
@@ -168,33 +168,63 @@ app.post('/editar_reboque', (req,res)=>{
 
 
 
-
+//----------------------------------------------------------------------------------------------------------------------------                                                            
 app.get('/cadastrar_usuario', (req,res)=>{
     res.render('cadastrar_usuario');
 })
-app.post('/cadastrar_usuario', (req,res)=>{
-    Usuario.create({
-        usuario: req.body.usuario,
-        senha: req.body.senha
-    }).then(()=>{
-        console.log(`usuario salvo com sucesso`)
-        res.render('cadastrar_usuario', {msgErro: "Usuario salvo."})
-    }).catch((erro)=>{
-        console.log(`erro ao inserir no banco: ${erro}`)
-        res.render('cadastrar_usuario')
+app.post('/cadastrar_usuario', async (req,res)=>{
+
+    let senha = req.body.senha;
+    let numeroDeSaltos = 5;
+
+    bcrypt.hash(senha, numeroDeSaltos, (err, hash)=>{
+       
+        if (err) {
+            console.log(err);
+            res.render('cadastra_usuario', {msgErro: "Erro ao criar usuario."})
+        } else {
+            Usuario.create({
+                usuario: req.body.usuario,
+                senha: hash
+            }).then(()=>{
+                console.log(`usuario salvo com sucesso`)
+                res.render('cadastrar_usuario', {msgErro: "Usuario criado com sucesso."})
+            }).catch((erro)=>{
+                console.log(`erro ao inserir no banco: ${erro}`)
+                res.render('cadastrar_usuario', {msgErro: "Erro ao criar ususario"})
+            })
+        }
     })
+
+   
 })
 app.get('/logar_usuario', (req,res)=>{
     res.render('logar_usuario');
 })
 app.post('/logar_usuario', async (req,res)=>{
+    
     let candidato = await Usuario.findOne({where: {usuario: req.body.usuario}});
-    let encontrou_usuario = false
+    let encontrou_usuario = false;
+    let hashDoBanco = candidato.senha;
+    let senhaDigitada = req.body.senha;
+    var testeSenha = false;
+
+    bcrypt.compare(senhaDigitada, hashDoBanco, (err, result)=>{
+        if(err) {
+            console.log(err);
+        } else if(result) {
+            testeSenha = true;
+            console.log(`Senha incorreta`);
+        } else {
+            testeSenha = false;
+            console.log(`Senha incorreta`);
+        }
+    })
 
    if(candidato == null){
         encontrou_usuario = false;
    } else {
-        if(req.body.senha == candidato.senha){
+        if(testeSenha){
             var usuario_nome = "Olá, "+candidato.usuario;
             encontrou_usuario = true;
         }
