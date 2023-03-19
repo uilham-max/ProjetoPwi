@@ -7,9 +7,9 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 })
 
 sequelize.authenticate().then(()=>{
-    console.log("conectado ao banco postresql")
+    console.log("'./db/connections' -> conectado ao banco postresql.")
 }).catch((erro)=>{
-    console.log(`erro ao conectar com o banco: ${erro}`)
+    console.log(`'./db/connections' -> erro ao conectar com o banco: ${erro}`)
 })
 
 module.exports = {Sequelize, sequelize}

@@ -4,10 +4,16 @@ const port = 3000;
 const handlebars = require('express-handlebars');
 const { where } = require('sequelize');
 const Usuario = require('./models/Usuario');
-const bcrypt = require('bcrypt');
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Cliente_Reboque = require('./models/Locacao')
+
+const passport = require('passport');
+const bcrypt = require('bcrypt');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+
 
 
 
@@ -203,39 +209,32 @@ app.get('/logar_usuario', (req,res)=>{
 })
 app.post('/logar_usuario', async (req,res)=>{
     
-    let candidato = await Usuario.findOne({where: {usuario: req.body.usuario}});
-    let encontrou_usuario = false;
-    let hashDoBanco = candidato.senha;
-    let senhaDigitada = req.body.senha;
-    var testeSenha = false;
-
-    bcrypt.compare(senhaDigitada, hashDoBanco, (err, result)=>{
-        if(err) {
-            console.log(err);
-        } else if(result) {
-            testeSenha = true;
-            console.log(`Senha incorreta`);
-        } else {
-            testeSenha = false;
-            console.log(`Senha incorreta`);
-        }
-    })
+    let candidato = null;
+    candidato = await Usuario.findOne({where: {usuario: req.body.usuario}});
+    let imprime_db = await Reboque.findAll();
 
    if(candidato == null){
-        encontrou_usuario = false;
-   } else {
-        if(testeSenha){
-            var usuario_nome = "Olá, "+candidato.usuario;
-            encontrou_usuario = true;
-        }
-   }
-    
-    if(encontrou_usuario){
-        let imprime_db = await Reboque.findAll();
-        res.render('mostrar_reboque', {usuario_nome, imprime_db })
+       
+        res.render('logar_usuario', {msgErro: "Usuário não existe."})
+   
     } else {
-        res.render('logar_usuario', {msgErro: "Usuário ou senha invalidos."})
-    }
+    
+        bcrypt.compare(req.body.senha, candidato.senha, (err, result)=>{
+            
+            if(err) {
+                console.log(err);
+            } else if(result) {
+                console.log(`Login realizado com sucesso`);
+                let usuario = "Olà, "+candidato.usuario;
+                res.render('mostrar_reboque', {usuario, imprime_db});
+            } else {
+                console.log(`Senha incorreta`);
+                res.render('logar_usuario', {msgErro: "Senha invalida."});
+            }
+        
+        })
+
+   }
 
 })
 
