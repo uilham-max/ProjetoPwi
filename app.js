@@ -1,30 +1,26 @@
+ 
+ /* Aplicação para gerenciamento de aluguéis de reboques */
+
 const express = require('express');
 const app = express();
 const port = 3000;
 const handlebars = require('express-handlebars');
+const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 const Usuario = require('./models/Usuario');
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Cliente_Reboque = require('./models/Locacao')
 
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
 
-
-
-
-
-// working whith json
+// Definindo o tipo de arquivo
 app.use(express.urlencoded(
     {extended: true}
 ))
 app.use(express.json());
 
 
-// working whith view engine - handlebars
+// Definindo o motor de "template"
 app.engine('handlebars', handlebars.engine({
     defaultLayout: 'main',
     runtimeOptions: {
@@ -174,7 +170,6 @@ app.post('/editar_reboque', (req,res)=>{
 
 
 
-//----------------------------------------------------------------------------------------------------------------------------                                                            
 app.get('/cadastrar_usuario', (req,res)=>{
     res.render('cadastrar_usuario');
 })
