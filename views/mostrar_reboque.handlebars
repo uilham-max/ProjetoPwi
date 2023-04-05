@@ -50,15 +50,15 @@
   <tbody>
     {{#each imprime_db}}
     <tr>
-        <th scope="row">{{id}}</th>
-        <td>{{modelo}}</td>
-        <td>{{placa}}</td>
-        <td>{{cor}}</td>
-        <td>{{valor}}</td>
-        <td><a href="/deletar_reboque/{{id}}"> <button class="btn btn-danger" >Remover</button> </a></td>
-        <td><a href="/editar_reboque/{{id}}"> <button class="btn btn-danger" >Editar</button> </a></td>
-        <td><a href="/vender/{{id}}"> <button class="btn btn-success" >Alugar</button> </a></td>
-        <td><a href="/reservar/{{id}}"> <button class="btn btn-success" >Reservar</button> </a></td>
+        <th scope="row">{{dataValues.idReboque}}</th>
+        <td>{{dataValues.modelo}}</td>
+        <td>{{dataValues.placa}}</td>
+        <td>{{dataValues.cor}}</td>
+        <td>{{dataValues.valor}}</td>
+        <td><a href="/deletar_reboque/{{dataValues.idReboque}}"> <button class="btn btn-danger" >Remover</button> </a></td>
+        <td><a href="/editar_reboque/{{dataValues.idReboque}}"> <button class="btn btn-danger" >Editar</button> </a></td>
+        <td><a href="/buscar_cliente/{{dataValues.idReboque}}"> <button class="btn btn-success" >Alugar</button> </a></td>
+        <td><a href="/reservar/{{dataValues.idReboque}}"> <button class="btn btn-success" >Reservar</button> </a></td>
     </tr>
     {{/each}}
   </tbody>

@@ -135,7 +135,7 @@ app.get('/mostrar_reboque', async (req,res)=>{
 })
 app.get('/deletar_reboque/:id', (req,res)=>{
     Reboque.destroy({
-        where: {'id': req.params.id}
+        where: {'id': req.params.idReboque}
     }).then(()=>{
         console.log("Reboque excluido com sucesso!")
         res.redirect('/mostrar_reboque')
@@ -144,10 +144,10 @@ app.get('/deletar_reboque/:id', (req,res)=>{
         res.redirect('/mostrar_reboque')
     })
 })
-app.get('/editar_reboque/:id', async (req,res)=>{
+app.get('/editar_reboque/:idReboque', async (req,res)=>{
     //let meu_id = req.params.id
     let reboque = await Reboque.findOne({
-        where: {id: req.params.id}
+        where: {idReboque: req.params.idReboque}
     })
     res.render('editar_reboque', reboque)
 })
@@ -166,6 +166,24 @@ app.post('/editar_reboque', (req,res)=>{
         console.log(err)
     })
     
+})
+                                                                    /* desenvolvendo o mecanismo para realizar 
+                                                                    uma locação*/
+
+app.get('/buscar_cliente/:idReboque', async (req, res) => {   
+    console.log(`buscar_cliente: ${req.params.idReboque}`);          
+                     
+    let clientes_db = await Cliente.findAll();
+    let idReboque = req.params.idReboque; // este valor nao esta sendo repassado para rota alugar_reboque
+    res.render('buscar_cliente', {idReboque, clientes_db})
+
+})
+app.get('/alugar_reboque/:idReboque/:id', async (req, res) => {
+    let reboque_escolhido = await Reboque.findOne({
+        where: {idReboque: req.params.idReboque}
+    })
+    console.log(`alugar_reboque: ${reboque_escolhido}`);
+    res.render('alugar_reboque', reboque_escolhido);
 })
 
 

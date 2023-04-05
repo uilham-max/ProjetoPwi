@@ -4,25 +4,27 @@
 
     <div class="container text-center">
         <div class="container text-center">
-            <br><h1> <p>Editar Reboque</p> </h1><br>
         </div>
-         <form action="/editar_reboque" method="POST">
+         <form action="/alugar_reboque" method="POST">
             <div class="container">
                 
+                <br><h1> <p>Modelo</p> </h1><br>
+
+
                 <input type="hidden" name="id" value="{{dataValues.idReboque}}">
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" value="{{dataValues.modelo}}" >
+                    <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" value="{{dataValues.modelo}}" disabled >
                     <label for="floatingInput">Modelo </label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="placa" class="form-control" id="placa" placeholder="placa" value="{{dataValues.placa}}" >
+                    <input type="text" name="placa" class="form-control" id="placa" placeholder="placa" value="{{dataValues.placa}}" disabled >
                     <label for="floatingInput">Placa</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="cor" class="form-control" id="cor" placeholder="cor" value="{{dataValues.cor}}" >
+                    <input type="text" name="cor" class="form-control" id="cor" placeholder="cor" value="{{dataValues.cor}}" disabled >
                     <label for="floatingInput">Cor</label>
                 </div>
 
@@ -32,12 +34,13 @@
                     <span class="input-group-text">.00</span>
                 </div>
 
-                <br><button type="submit" class="btn btn-outline-primary">Editar Reboque</button><br>{{msgErro}}<br> 
+
+                <br><button type="submit" class="btn btn-outline-primary">Confirmar</button><br>{{msgErro}}<br> 
                 
             </div>
         </form>
                 <a href="/mostrar_reboque"><button class="btn btn-outline-primary">Ir para reboques</button></a>
-                <a href="/mostrar_cliente"><button class="btn btn-outline-primary">Ir para clientes</button></a>
+                <a href="/mostrar_cliente"><button class="btn btn-outline-primary">Buscar cliente</button></a>
                 <a href="/"><button class="btn btn-outline-primary" >Página Inicial</button></a><br><br>
     </div>
     
