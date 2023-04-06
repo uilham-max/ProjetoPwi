@@ -27,10 +27,14 @@
           <a class="nav-link disabled">{{usuario}}  </a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    
+        <select id="select-cliente" class="form-select" aria-label="Default select example">
+          <option selected>Selecionar cliente</option>
+          {{#each clientes}}
+            <option value="{{dataValues.id}}">{{dataValues.nome}}</option>
+          {{/each}}
+        </select>
+
     </div>
   </div>
 </nav>
@@ -58,9 +62,22 @@
         <td><a href="/deletar_reboque/{{dataValues.idReboque}}"> <button class="btn btn-danger" >Remover</button> </a></td>
         <td><a href="/editar_reboque/{{dataValues.idReboque}}"> <button class="btn btn-danger" >Editar</button> </a></td>
         <td><a href="/buscar_cliente/{{dataValues.idReboque}}"> <button class="btn btn-success" >Alugar</button> </a></td>
+        {{!-- <td><a href="/alugar_reboque/{{dataValues.idReboque}}/2"> <button class="btn btn-success" >Alugar</button> </a></td> --}}
         <td><a href="/reservar/{{dataValues.idReboque}}"> <button class="btn btn-success" >Reservar</button> </a></td>
     </tr>
     {{/each}}
   </tbody>
 </table>
 </div>
+
+
+<script>
+$(document).ready(function() {
+  $('.alugar-reboque').click(function() {
+    var idReboque = $(this).attr('href').split('/')[2];
+    var idCliente = $('#select-cliente').val();
+    $(this).attr('href', '/alugar_reboque/' + idReboque + '/' + idCliente);
+  });
+});
+
+</script>

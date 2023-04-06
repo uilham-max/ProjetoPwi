@@ -11,7 +11,13 @@
                 <br><h1> <p>Modelo</p> </h1><br>
 
 
-                <input type="hidden" name="id" value="{{dataValues.idReboque}}">
+                <input type="hidden" name="idReboque" value="{{dataValues.idReboque}}">
+                <input type="hidden" name="id" value="{{dataValues.id}}">
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="nome" class="form-control" id="nome" placeholder="nome" value="{{dataValues.nome}}" disabled >
+                    <label for="floatingInput">Cliente </label>
+                </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" value="{{dataValues.modelo}}" disabled >

@@ -11,7 +11,7 @@ const Usuario = require('./models/Usuario');
 const Cliente = require('./models/Cliente');
 const Reboque = require('./models/Reboque');
 const Cliente_Reboque = require('./models/Locacao')
-
+var idReboque_escolhido = -1;
 
 // Definindo o tipo de arquivo
 app.use(express.urlencoded(
@@ -129,13 +129,82 @@ app.post('/cadastrar_reboque', (req,res)=>{
         res.render('cadastrar_reboque');
     })
 })
+
+// /*------------------------ TRABALHANDO INICIO -----------------------*/
+
+// app.get('/mostrar_reboque', async (req,res)=>{
+//     let imprime_db = await Reboque.findAll();
+//     let clientes = await Cliente.findAll();
+//     res.render('mostrar_reboque',{imprime_db, clientes})
+// })
+
+// app.get('/buscar_cliente/:idReboque', async (req, res) => {   
+//     console.log(`idReboque: ${req.params.idReboque}`);          
+//     let clientes_db = await Cliente.findAll();
+//     idReboque = req.params.idReboque; // ERRO! este valor nao esta sendo repassado para rota alugar_reboque
+//     res.render('buscar_cliente', {clientes_db})
+// })
+
+// app.get('/alugar_reboque/:idReboque/:id', async (req, res) => {
+//     let reboque_escolhido = await Reboque.findOne({where: {idReboque: req.params.idReboque}})
+//     console.log(`reboque_escolhido: ${reboque_escolhido.placa}`);
+    
+//     let cliente_escolhido = await Cliente.findOne({where: {id: req.params.id}});
+//     console.log(`cliente_escolhido: ${cliente_escolhido.nome}`);
+//     res.render('alugar_reboque', {reboque_escolhido: reboque_escolhido, cliente_escolhido: cliente_escolhido});
+// })
+
+// /*------------------------ TRABALHANDO FIM -----------------------*/
+
+
+/*------------------------ TRABALHANDO INICIO -----------------------*/
 app.get('/mostrar_reboque', async (req,res)=>{
+
     let imprime_db = await Reboque.findAll();
-    res.render('mostrar_reboque',{imprime_db})
+    let clientes = await Cliente.findAll();
+    res.render('mostrar_reboque',{imprime_db, clientes})
+
 })
-app.get('/deletar_reboque/:id', (req,res)=>{
+
+app.get('/buscar_cliente/:idReboque', async (req, res) => {   
+
+    // let idReboque_escolhido = req.params.idReboque;
+    let reboque_escolhido = await Reboque.findOne({
+        where: {idReboque: req.params.idReboque}
+    })
+
+    idReboque_escolhido = req.params.idReboque;
+
+    let clientes_db = await Cliente.findAll();
+     
+    res.render('buscar_cliente', {clientes_db, reboque_escolhido})
+
+})
+
+app.get('/alugar_reboque/:id', async (req, res) => { // eu ja tenho o id do cliente e o  id do reboque 
+
+    
+    let reboque_escolhido = await Reboque.findOne({
+        where: {idReboque: idReboque_escolhido}
+    })
+    console.log(`Modelo do reboque: ${reboque_escolhido.modelo}`);
+
+
+    let cliente_escolhido = await Cliente.findOne({
+        where: {id: req.params.id}
+    });
+    console.log(`Nome do cliente: ${cliente_escolhido.nome}`);
+
+
+    res.render('alugar_reboque', {cliente_escolhido, reboque_escolhido});
+
+})
+/*------------------------ TRABALHANDO FIM -----------------------*/
+
+
+app.get('/deletar_reboque/:idReboque', (req,res)=>{
     Reboque.destroy({
-        where: {'id': req.params.idReboque}
+        where: {idReboque: req.params.idReboque}
     }).then(()=>{
         console.log("Reboque excluido com sucesso!")
         res.redirect('/mostrar_reboque')
@@ -145,7 +214,7 @@ app.get('/deletar_reboque/:id', (req,res)=>{
     })
 })
 app.get('/editar_reboque/:idReboque', async (req,res)=>{
-    //let meu_id = req.params.id
+    // let id = req.params.idReboque
     let reboque = await Reboque.findOne({
         where: {idReboque: req.params.idReboque}
     })
@@ -158,7 +227,7 @@ app.post('/editar_reboque', (req,res)=>{
         cor: req.body.cor,
         valor: req.body.valor
     },{
-        where: {id: req.body.id}
+        where: {idReboque: req.body.idReboque}
     }).then(()=>{
         console.log("Reboque alterado.")
         res.redirect('/mostrar_reboque')
@@ -167,25 +236,6 @@ app.post('/editar_reboque', (req,res)=>{
     })
     
 })
-                                                                    /* desenvolvendo o mecanismo para realizar 
-                                                                    uma locação*/
-
-app.get('/buscar_cliente/:idReboque', async (req, res) => {   
-    console.log(`buscar_cliente: ${req.params.idReboque}`);          
-                     
-    let clientes_db = await Cliente.findAll();
-    let idReboque = req.params.idReboque; // este valor nao esta sendo repassado para rota alugar_reboque
-    res.render('buscar_cliente', {idReboque, clientes_db})
-
-})
-app.get('/alugar_reboque/:idReboque/:id', async (req, res) => {
-    let reboque_escolhido = await Reboque.findOne({
-        where: {idReboque: req.params.idReboque}
-    })
-    console.log(`alugar_reboque: ${reboque_escolhido}`);
-    res.render('alugar_reboque', reboque_escolhido);
-})
-
 
 
 app.get('/cadastrar_usuario', (req,res)=>{
