@@ -7,6 +7,6 @@ const Cliente = db.sequelize.define('cliente',{
     email: {type: db.Sequelize.STRING, allowNull: false}
 });
 
-// Cliente.sync({force:true}) // remover force true
+//Cliente.sync({force:true}) // remover force true
 
 module.exports = Cliente;

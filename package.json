@@ -20,8 +20,8 @@
     "jsdom": "^21.1.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.9.0",
+    "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.28.0"
+    "sequelize": "^6.31.0"
   }
 }

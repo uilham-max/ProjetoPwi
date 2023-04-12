@@ -9,7 +9,7 @@ const Reboque = db.sequelize.define('reboque',{
     valor: {type: db.Sequelize.INTEGER, allowNull: false}
 });
 
-// Reboque.sync({force: true});
+//Reboque.sync({force: true});
 
 module.exports = Reboque;
 

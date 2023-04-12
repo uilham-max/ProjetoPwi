@@ -183,7 +183,7 @@ app.get('/buscar_cliente/:idReboque', async (req, res) => {
 
 app.get('/alugar_reboque/:id', async (req, res) => { // eu ja tenho o id do cliente e o  id do reboque 
 
-    
+
     let reboque_escolhido = await Reboque.findOne({
         where: {idReboque: idReboque_escolhido}
     })
@@ -196,7 +196,7 @@ app.get('/alugar_reboque/:id', async (req, res) => { // eu ja tenho o id do clie
     console.log(`Nome do cliente: ${cliente_escolhido.nome}`);
 
 
-    res.render('alugar_reboque', {cliente_escolhido, reboque_escolhido});
+    res.render('alugar_reboque', {cliente: cliente_escolhido, reboque: reboque_escolhido});
 
 })
 /*------------------------ TRABALHANDO FIM -----------------------*/

@@ -11,32 +11,32 @@
                 <br><h1> <p>Modelo</p> </h1><br>
 
 
-                <input type="hidden" name="idReboque" value="{{dataValues.idReboque}}">
-                <input type="hidden" name="id" value="{{dataValues.id}}">
+                <input type="hidden" name="idReboque" value="{{reboque.idReboque}}">
+                <input type="hidden" name="id" value="{{cliente.id}}">
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="nome" class="form-control" id="nome" placeholder="nome" value="{{dataValues.nome}}" disabled >
+                    <input type="text" name="nome" class="form-control" id="nome" placeholder="nome" value="{{cliente.nome}}" disabled >
                     <label for="floatingInput">Cliente </label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" value="{{dataValues.modelo}}" disabled >
+                    <input type="text" name="modelo" class="form-control" id="modelo" placeholder="modelo" value="{{reboque.modelo}}" disabled >
                     <label for="floatingInput">Modelo </label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="placa" class="form-control" id="placa" placeholder="placa" value="{{dataValues.placa}}" disabled >
+                    <input type="text" name="placa" class="form-control" id="placa" placeholder="placa" value="{{reboque.placa}}" disabled >
                     <label for="floatingInput">Placa</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="cor" class="form-control" id="cor" placeholder="cor" value="{{dataValues.cor}}" disabled >
+                    <input type="text" name="cor" class="form-control" id="cor" placeholder="cor" value="{{reboque.cor}}" disabled >
                     <label for="floatingInput">Cor</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">$</span>
-                    <input type="number" name="valor" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Preço da diária" min="1" value="{{dataValues.valor}}" required >
+                    <input type="number" name="valor" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Preço da diária" min="1" value="{{reboque.valor}}" required >
                     <span class="input-group-text">.00</span>
                 </div>
 
